@@ -42,10 +42,6 @@ An interactive and responsive Simon Says memory game built with **Vanilla JavaSc
 | Web Audio API | Sound effects |
 | LocalStorage | Persistent game preferences and progress |
 
-## 📸 Screenshots
-
-<!-- Add your project screenshots here -->
-
 ## ⚙️ Requirements
 
 - Node.js 18 or later recommended
