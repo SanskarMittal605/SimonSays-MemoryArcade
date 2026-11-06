@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en" data-theme="forest">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#10251d" />
+    <meta
+      name="description"
+      content="Test your memory with Simon Says, a colorful sequence memory game."
+    />
+
+    <title>Simon Says — Memory Arcade</title>
+
+    <!-- Prevent flash of unstyled content -->
+    <style>
+      html {
+        min-height: 100%;
+        background: #10251d;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        background: #10251d;
+        color: #f4f7f4;
+      }
+
+      html:not(.styles-ready) .app-shell {
+        visibility: hidden;
+      }
+
+      html.styles-ready .app-shell {
+        visibility: visible;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="app-shell">
+      <!-- Header -->
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Simon Says home">
+          <span class="brand-mark">S</span>
+          <span>SIMON<span class="brand-accent">SAYS</span></span>
+        </a>
+
+        <div class="topbar-actions">
+          <label class="theme-control">
+            <span class="control-label">THEME</span>
+
+            <div class="theme-select-wrap">
+              <select
+                id="theme-select"
+                class="select select-bordered select-sm"
+                aria-label="Choose color theme"
+              >
+                <option value="forest">Forest</option>
+                <option value="dracula">Dracula</option>
+                <option value="cupcake">Cupcake</option>
+                <option value="synthwave">Synthwave</option>
+                <option value="cyberpunk">Cyberpunk</option>
+                <option value="nord">Nord</option>
+                <option value="luxury">Luxury</option>
+                <option value="aqua">Aqua</option>
+                <option value="sunset">Sunset</option>
+                <option value="business">Business</option>
+              </select>
+
+              <span class="theme-arrow">▾</span>
+            </div>
+          </label>
+
+          <button
+            id="sound-toggle"
+            class="btn btn-ghost btn-sm icon-button"
+            type="button"
+            aria-label="Toggle sound"
+          >
+            <span id="sound-icon">♫</span>
+            <span id="sound-label">Sound on</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main content -->
+      <main class="main-content">
+        <section class="intro">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            THE MEMORY ARCADE
+          </div>
+
+          <h1>Train your <span>memory.</span><br />Beat your best.</h1>
+          <p class="intro-copy">
+            Watch the pattern. Remember the sequence. How far can you go?
+          </p>
+        </section>
+
+        <section class="game-layout" aria-label="Simon Says game">
+          <!-- Left sidebar -->
+          <aside class="side-panel">
+            <!-- Scoreboard -->
+            <div class="panel-card stats-card">
+              <div class="panel-heading">
+                <span class="panel-kicker">YOUR SESSION</span>
+                <span class="live-indicator"><i></i> LIVE</span>
+              </div>
+
+              <div class="stat-grid">
+                <div class="stat-box">
+                  <span class="stat-label">LEVEL</span>
+                  <strong id="level-value">0</strong>
+                </div>
+
+                <div class="stat-box">
+                  <span class="stat-label">SCORE</span>
+                  <strong id="score-value">0</strong>
+                </div>
+
+                <div class="stat-box stat-wide">
+                  <span class="stat-label">PERSONAL BEST</span>
+                  <strong id="best-value">0</strong>
+                </div>
+              </div>
+
+              <div class="progress-meta">
+                <span>MEMORY PROGRESS</span>
+                <span id="progress-label">0 / 0</span>
+              </div>
+
+              <progress
+                id="progress-bar"
+                class="progress progress-primary"
+                value="0"
+                max="1"
+              ></progress>
+            </div>
+
+            <!-- Game controls -->
+            <div class="panel-card controls-card">
+              <span class="panel-kicker">GAME CONTROLS</span>
+
+              <label class="field-label" for="difficulty-select">
+                DIFFICULTY
+              </label>
+
+              <div class="difficulty-select-wrap">
+                <select
+                  id="difficulty-select"
+                  class="select select-bordered select-sm w-full"
+                >
+                  <option value="easy">Easy · relaxed pace</option>
+                  <option value="normal" selected>Normal · classic pace</option>
+                  <option value="hard">Hard · quick flashes</option>
+                  <option value="pro">Pro · extreme speed</option>
+                </select>
+
+                <span class="difficulty-arrow">▾</span>
+              </div>
+
+              <div class="button-stack">
+                <button
+                  id="start-button"
+                  class="btn btn-primary start-button"
+                  type="button"
+                >
+                  ▶ &nbsp; Start game
+                </button>
+
+                <div class="button-row">
+                  <button
+                    id="pause-button"
+                    class="btn btn-outline"
+                    type="button"
+                    disabled
+                  >
+                    Ⅱ Pause
+                  </button>
+
+                  <button
+                    id="restart-button"
+                    class="btn btn-ghost"
+                    type="button"
+                  >
+                    ↻ Restart
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick tip -->
+            <div class="tip-card">
+              <span class="tip-icon">✦</span>
+              <div>
+                <strong>Quick tip</strong>
+                <p>
+                  Focus on the order, not the speed. The sequence grows by one
+                  with every level.
+                </p>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Main game board -->
+          <section class="play-panel">
+            <div class="play-panel-top">
+              <div>
+                <span class="panel-kicker">THE SIMON CHALLENGE</span>
+                <h2 id="game-status">Ready when you are</h2>
+                <p id="game-message">
+                  Press Start game to begin your first round.
+                </p>
+              </div>
+
+              <div class="round-chip">
+                <span class="round-chip-dot"></span>
+                <span id="round-label">ROUND 00</span>
+              </div>
+            </div>
+
+            <div class="board-wrap">
+              <div
+                class="game-board"
+                id="game-board"
+                aria-label="Four color game pads"
+              >
+                <button
+                  class="game-pad pad-red"
+                  data-color="red"
+                  type="button"
+                  aria-label="Red pad, keyboard key 1"
+                >
+                  <span class="pad-number">01</span>
+                  <span class="pad-name">RUBY</span>
+                </button>
+
+                <button
+                  class="game-pad pad-blue"
+                  data-color="blue"
+                  type="button"
+                  aria-label="Blue pad, keyboard key 2"
+                >
+                  <span class="pad-number">02</span>
+                  <span class="pad-name">OCEAN</span>
+                </button>
+
+                <button
+                  class="game-pad pad-yellow"
+                  data-color="yellow"
+                  type="button"
+                  aria-label="Yellow pad, keyboard key 3"
+                >
+                  <span class="pad-number">03</span>
+                  <span class="pad-name">AMBER</span>
+                </button>
+
+                <button
+                  class="game-pad pad-green"
+                  data-color="green"
+                  type="button"
+                  aria-label="Green pad, keyboard key 4"
+                >
+                  <span class="pad-number">04</span>
+                  <span class="pad-name">MINT</span>
+                </button>
+
+                <div class="board-center">
+                  <span class="center-symbol">S</span>
+                  <span>SIMON</span>
+                  <small>MEMORY GAME</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="play-footer">
+              <div class="key-hint">
+                <span class="keycap">1</span>
+                <span class="keycap">2</span>
+                <span class="keycap">3</span>
+                <span class="keycap">4</span>
+                <span>Use keyboard or click the pads</span>
+              </div>
+
+              <span class="sequence-hint" id="sequence-hint">
+                SEQUENCE LENGTH: 0
+              </span>
+            </div>
+          </section>
+        </section>
+
+        <!-- Information cards -->
+        <section class="bottom-grid">
+          <article class="info-card">
+            <div class="info-icon">◎</div>
+            <div>
+              <h3>How to play</h3>
+              <p>
+                Watch the pads light up, then repeat the same sequence in the
+                correct order. Each round adds one new color.
+              </p>
+            </div>
+          </article>
+
+          <article class="info-card">
+            <div class="info-icon">⌁</div>
+            <div>
+              <h3>Build your streak</h3>
+              <p>
+                Complete each sequence to level up. One wrong move ends the
+                round, so stay focused.
+              </p>
+            </div>
+          </article>
+
+          <article class="info-card">
+            <div class="info-icon">♛</div>
+            <div>
+              <h3>Beat your record</h3>
+              <p>
+                Your personal best is saved on this device. Keep playing and see
+                if you can beat it.
+              </p>
+            </div>
+          </article>
+        </section>
+
+        <!-- Achievements -->
+        <section
+          class="achievements-section"
+          aria-labelledby="achievements-title"
+        >
+          <div class="achievements-heading">
+            <div>
+              <span class="panel-kicker">YOUR PROGRESS</span>
+              <h2 id="achievements-title">Achievements</h2>
+              <p>Small wins lead to big memory milestones.</p>
+            </div>
+
+            <div class="achievement-total" aria-live="polite">
+              <strong id="achievement-count">0 / 8</strong>
+              <span>UNLOCKED</span>
+            </div>
+          </div>
+
+          <div
+            class="achievements-grid"
+            id="achievements-grid"
+            aria-live="polite"
+          ></div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+          <div class="footer-brand">
+            <span class="footer-brand-mark">S</span>
+            <span>SIMON<span class="brand-accent">SAYS</span></span>
+          </div>
+
+          <p>Memory <span>•</span> Focus <span>•</span> Reflex</p>
+
+          <span class="footer-credit">
+            Designed &amp; developed by <strong>Sanskar Mittal</strong>
+          </span>
+
+          <span class="footer-copyright">
+            © <span id="copyright-year"></span> Simon Says. Keep your mind in
+            play.
+          </span>
+        </footer>
+      </main>
+    </div>
+
+    <!-- Game over dialog -->
+    <dialog id="game-over-dialog" class="modal">
+      <div class="modal-box game-over-box">
+        <div class="game-over-icon">✦</div>
+
+        <p class="panel-kicker">ROUND COMPLETE</p>
+        <h2>Nice try!</h2>
+
+        <p class="modal-copy">
+          Every round makes your memory stronger. Ready for another?
+        </p>
+
+        <div class="result-grid">
+          <div>
+            <span>YOUR SCORE</span>
+            <strong id="final-score">0</strong>
+          </div>
+
+          <div>
+            <span>BEST SCORE</span>
+            <strong id="final-best">0</strong>
+          </div>
+        </div>
+
+        <button
+          id="play-again-button"
+          class="btn btn-primary start-button"
+          type="button"
+        >
+          ↻ &nbsp; Play again
+        </button>
+
+        <button id="close-dialog-button" class="btn btn-ghost" type="button">
+          Close
+        </button>
+      </div>
+
+      <form method="dialog" class="modal-backdrop">
+        <button aria-label="Close dialog">close</button>
+      </form>
+    </dialog>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

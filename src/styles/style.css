@@ -1,0 +1,1365 @@
+/* 1. Font, Tailwind CSS & DaisyUI */
+
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Urbanist:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Oxanium:wght@400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800&family=Audiowide&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@400;500;600;700;800&family=Michroma&display=swap");
+
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes:
+    forest,
+    dracula --default,
+    cupcake,
+    synthwave,
+    cyberpunk,
+    nord,
+    luxury,
+    aqua,
+    sunset,
+    business;
+}
+
+/* 2. Global styles */
+
+:root {
+  font-family: "Manrope", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family: "Manrope", sans-serif;
+  background: var(--color-base-200);
+  color: var(--color-base-content);
+}
+
+button,
+select,
+input,
+textarea {
+  font: inherit;
+}
+
+/* 3. Application layout */
+
+.app-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      color-mix(in srgb, var(--color-primary) 13%, transparent),
+      transparent 42%
+    ),
+    var(--color-base-200);
+}
+
+/* 4. Header & branding */
+
+.topbar {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(20px, 5vw, 76px);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--color-base-content) 10%, transparent);
+  background: color-mix(in srgb, var(--color-base-100) 86%, transparent);
+  backdrop-filter: blur(18px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  color: var(--color-base-content);
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: var(--color-primary);
+  color: var(--color-primary-content);
+  font-size: 20px;
+  font-weight: 900;
+  box-shadow: 0 5px 20px
+    color-mix(in srgb, var(--color-primary) 30%, transparent);
+}
+
+.brand-accent {
+  color: var(--color-primary);
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 5. Theme selector & sound */
+
+.theme-control {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.control-label,
+.panel-kicker,
+.field-label,
+.stat-label,
+.progress-meta,
+.sequence-hint {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--color-base-content);
+  opacity: 0.58;
+}
+
+.theme-select-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.theme-select-wrap select {
+  width: 125px;
+  min-height: 34px;
+  height: 34px;
+  padding-right: 32px;
+  appearance: none;
+  cursor: pointer;
+  border-radius: 30px;
+  font-size: 12px;
+  background: var(--color-base-100);
+}
+
+.theme-arrow {
+  position: absolute;
+  right: 13px;
+  pointer-events: none;
+  font-size: 15px;
+  opacity: 0.7;
+}
+
+.icon-button {
+  gap: 7px;
+  font-size: 12px;
+}
+
+/* 6. Introduction */
+
+.main-content {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 52px 0 25px;
+}
+
+.intro {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 28%, transparent);
+  border-radius: 99px;
+  color: var(--color-primary);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.19em;
+  background: color-mix(in srgb, var(--color-primary) 7%, transparent);
+}
+
+.eyebrow-dot,
+.live-indicator i,
+.round-chip-dot {
+  width: 7px;
+  height: 7px;
+  display: inline-block;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 0 12px var(--color-primary);
+}
+
+.intro h1 {
+  margin: 17px 0 10px;
+  font-size: clamp(36px, 5vw, 57px);
+  line-height: 1.06;
+  letter-spacing: -0.055em;
+  font-weight: 800;
+}
+
+.intro h1 span {
+  color: var(--color-primary);
+}
+
+.intro-copy {
+  margin: 0;
+  color: var(--color-base-content);
+  opacity: 0.62;
+  font-size: 14px;
+}
+
+/* 7. Game layout & shared cards */
+
+.game-layout {
+  display: grid;
+  grid-template-columns: 285px minmax(0, 1fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.panel-card,
+.play-panel,
+.info-card {
+  border: 1px solid
+    color-mix(in srgb, var(--color-base-content) 10%, transparent);
+  background: var(--color-base-100);
+  border-radius: 20px;
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.07);
+}
+
+.panel-card {
+  padding: 19px;
+}
+
+/* 8. Scoreboard & progress */
+
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--color-success);
+}
+
+.live-indicator i {
+  width: 6px;
+  height: 6px;
+  background: var(--color-success);
+  box-shadow: 0 0 10px var(--color-success);
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  margin: 16px 0;
+}
+
+.stat-box {
+  min-height: 76px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 13px;
+  background: var(--color-base-200);
+}
+
+.stat-wide {
+  grid-column: span 2;
+  min-height: 62px;
+}
+
+.stat-label {
+  font-size: 9px;
+}
+
+.stat-box strong {
+  font-size: 26px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+}
+
+.stat-wide strong {
+  font-size: 22px;
+  color: var(--color-primary);
+}
+
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0 8px;
+  font-size: 9px;
+}
+
+.progress {
+  height: 6px;
+}
+
+/* 9. Game controls & dropdowns */
+
+.controls-card {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.field-label {
+  margin-top: 3px;
+}
+
+.controls-card .select {
+  width: 100%;
+  background: var(--color-base-200);
+}
+
+.difficulty-select-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.difficulty-select-wrap select {
+  width: 100%;
+  padding-right: 35px;
+  appearance: none;
+  cursor: pointer;
+}
+
+.difficulty-arrow {
+  position: absolute;
+  right: 15px;
+  pointer-events: none;
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.button-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.start-button {
+  width: 100%;
+  min-height: 46px;
+  border: 0;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  box-shadow: 0 7px 20px
+    color-mix(in srgb, var(--color-primary) 24%, transparent);
+}
+
+.button-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.button-row .btn {
+  min-height: 38px;
+  font-size: 11px;
+}
+
+/* 10. Quick tip card */
+
+.tip-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 18px;
+  border-radius: 16px;
+  background: color-mix(
+    in srgb,
+    var(--color-primary) 9%,
+    var(--color-base-100)
+  );
+  border: 1px solid color-mix(in srgb, var(--color-primary) 18%, transparent);
+}
+
+.tip-icon {
+  flex-shrink: 0;
+  color: var(--color-primary);
+  font-size: 25px;
+  line-height: 1.3;
+}
+
+.tip-card strong {
+  display: block;
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.tip-card p {
+  margin: 5px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  opacity: 0.72;
+}
+
+/* 11. Main game panel */
+
+.play-panel {
+  padding: 22px clamp(16px, 3vw, 30px) 18px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.play-panel-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.play-panel-top h2 {
+  margin: 7px 0 4px;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+.play-panel-top p {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.58;
+}
+
+.round-chip {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 10px;
+  border-radius: 99px;
+  background: var(--color-base-200);
+  white-space: nowrap;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  opacity: 0.8;
+}
+
+.round-chip-dot {
+  width: 6px;
+  height: 6px;
+}
+
+/* 12. Game board & color pads */
+
+.board-wrap {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 18px 0 14px;
+}
+
+.game-board {
+  position: relative;
+  width: min(100%, 440px);
+  aspect-ratio: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 13px;
+  padding: 13px;
+  border-radius: 50%;
+  background: var(--color-base-300);
+  box-shadow:
+    inset 0 2px 9px rgba(0, 0, 0, 0.18),
+    0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+.game-pad {
+  position: relative;
+  overflow: hidden;
+  border: 0;
+  cursor: pointer;
+  opacity: 0.88;
+  transition:
+    filter 0.15s,
+    transform 0.15s,
+    opacity 0.15s,
+    box-shadow 0.15s;
+  box-shadow:
+    inset 0 3px 8px rgba(255, 255, 255, 0.22),
+    inset 0 -7px 12px rgba(0, 0, 0, 0.15);
+}
+
+.game-pad::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.2),
+    transparent 48%
+  );
+  pointer-events: none;
+}
+
+.game-pad:hover {
+  opacity: 1;
+  filter: brightness(1.08);
+}
+
+.game-pad:focus-visible {
+  outline: 4px solid var(--color-base-content);
+  outline-offset: 3px;
+  z-index: 2;
+}
+
+/* Individual pad colors and shapes */
+
+.pad-red {
+  background: #e34d78;
+  border-radius: 100% 15% 15% 15%;
+}
+
+.pad-blue {
+  background: #3a9fc1;
+  border-radius: 15% 100% 15% 15%;
+}
+
+.pad-yellow {
+  background: #f5a044;
+  border-radius: 15% 15% 15% 100%;
+}
+
+.pad-green {
+  background: #6dbd91;
+  border-radius: 15% 15% 100% 15%;
+}
+
+/* 13. Game pad labels */
+
+.pad-number,
+.pad-name {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  color: rgba(20, 30, 40, 0.85);
+  white-space: nowrap;
+  line-height: 1.3;
+  transform: none;
+}
+
+.pad-number {
+  font-size: clamp(12px, 1.2vw, 15px);
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.pad-name {
+  font-size: clamp(10px, 1vw, 12px);
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+/* Red pad */
+
+.pad-red .pad-number {
+  top: 28%;
+  left: 28%;
+}
+
+.pad-red .pad-name {
+  bottom: 25%;
+  left: 28%;
+}
+
+/* Blue pad */
+
+.pad-blue .pad-number {
+  top: 28%;
+  right: 28%;
+}
+
+.pad-blue .pad-name {
+  bottom: 25%;
+  right: 28%;
+}
+
+/* Yellow pad */
+
+.pad-yellow .pad-number {
+  bottom: 28%;
+  left: 28%;
+}
+
+.pad-yellow .pad-name {
+  top: 25%;
+  left: 28%;
+}
+
+/* Green pad */
+
+.pad-green .pad-number {
+  bottom: 28%;
+  right: 28%;
+}
+
+.pad-green .pad-name {
+  top: 25%;
+  right: 28%;
+}
+
+/* 14. Pad animations */
+
+.game-pad.is-flashing {
+  opacity: 1;
+  filter: brightness(1.7) saturate(1.2);
+  transform: scale(0.965);
+  box-shadow:
+    0 0 32px currentColor,
+    inset 0 0 25px rgba(255, 255, 255, 0.65);
+}
+
+.game-pad.is-user-flash {
+  opacity: 1;
+  filter: brightness(1.5);
+  transform: scale(0.97);
+}
+
+.game-pad.is-flashing .pad-number,
+.game-pad.is-flashing .pad-name,
+.game-pad.is-user-flash .pad-number,
+.game-pad.is-user-flash .pad-name {
+  color: #17212b;
+}
+
+/* 15. Center game logo */
+
+.board-center {
+  position: absolute;
+  z-index: 3;
+  width: 25%;
+  aspect-ratio: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 50%;
+  background: var(--color-base-100);
+  border: 5px solid var(--color-base-300);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.18);
+  font-size: clamp(7px, 0.9vw, 10px);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.center-symbol {
+  display: grid;
+  place-items: center;
+  width: 35%;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  background: var(--color-primary);
+  color: var(--color-primary-content);
+  font-size: clamp(14px, 2vw, 23px);
+}
+
+.board-center small {
+  font-size: clamp(5px, 0.65vw, 7px);
+  opacity: 0.5;
+  letter-spacing: 0.1em;
+}
+
+/* 16. Game footer & keyboard hints */
+
+.play-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 15px;
+  border-top: 1px solid
+    color-mix(in srgb, var(--color-base-content) 9%, transparent);
+}
+
+.key-hint {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  line-height: 1.5;
+  opacity: 0.72;
+}
+
+.keycap {
+  min-width: 24px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  border: 1px solid
+    color-mix(in srgb, var(--color-base-content) 18%, transparent);
+  border-radius: 6px;
+  background: var(--color-base-200);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.sequence-hint {
+  font-size: 11px;
+  white-space: nowrap;
+  opacity: 0.72;
+}
+
+/* 17. Information cards */
+
+.bottom-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 21px;
+  min-height: 125px;
+  border-radius: 18px;
+  box-shadow: none;
+}
+
+.info-icon {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  color: var(--color-primary);
+  font-size: 23px;
+}
+
+.info-card h3 {
+  margin: 1px 0 7px;
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.info-card p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.65;
+  opacity: 0.72;
+}
+
+/* 18. Game over modal */
+
+.game-over-box {
+  max-width: 390px;
+  text-align: center;
+  padding: 32px;
+  background: var(--color-base-100);
+}
+
+.game-over-icon {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 15px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--color-primary) 13%, transparent);
+  color: var(--color-primary);
+  font-size: 28px;
+}
+
+.game-over-box h2 {
+  margin: 7px 0;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.modal-copy {
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.result-grid div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 13px;
+  border-radius: 12px;
+  background: var(--color-base-200);
+}
+
+.result-grid span {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  opacity: 0.55;
+}
+
+.result-grid strong {
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.game-over-box .btn {
+  width: 100%;
+  margin-top: 7px;
+}
+
+/* 19. Tablet responsiveness */
+
+@media (max-width: 850px) {
+  .game-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .side-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .tip-card {
+    grid-column: span 2;
+  }
+
+  .game-board {
+    width: min(100%, 390px);
+  }
+
+  .bottom-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .info-card {
+    min-height: auto;
+  }
+}
+
+/* 20. Mobile responsiveness */
+
+@media (max-width: 540px) {
+  .topbar {
+    height: auto;
+    min-height: 68px;
+    padding: 12px 16px;
+  }
+
+  .brand {
+    font-size: 12px;
+    gap: 7px;
+  }
+
+  .brand-mark {
+    width: 30px;
+    height: 30px;
+  }
+
+  .topbar-actions {
+    gap: 5px;
+  }
+
+  .control-label {
+    display: none;
+  }
+
+  .theme-control .select {
+    width: 105px;
+    padding-left: 8px;
+  }
+
+  #sound-label {
+    display: none;
+  }
+
+  .main-content {
+    width: calc(100% - 26px);
+    padding-top: 35px;
+  }
+
+  .intro {
+    margin-bottom: 24px;
+  }
+
+  .intro-copy {
+    max-width: 290px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .side-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .tip-card {
+    grid-column: auto;
+    padding: 17px;
+    gap: 12px;
+  }
+
+  .tip-icon {
+    font-size: 23px;
+  }
+
+  .tip-card strong {
+    font-size: 14px;
+  }
+
+  .tip-card p {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .play-panel {
+    padding: 17px 13px 14px;
+  }
+
+  .play-panel-top h2 {
+    font-size: 18px;
+  }
+
+  .round-chip {
+    padding: 7px;
+    font-size: 8px;
+  }
+
+  .game-board {
+    width: min(100%, 340px);
+    gap: 9px;
+    padding: 9px;
+  }
+
+  .board-center {
+    border-width: 3px;
+  }
+
+  .play-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .key-hint {
+    flex-wrap: wrap;
+    font-size: 11px;
+  }
+
+  .keycap {
+    min-width: 23px;
+    height: 24px;
+  }
+
+  .sequence-hint {
+    align-self: flex-end;
+    font-size: 10px;
+  }
+
+  .info-card {
+    padding: 17px;
+    gap: 13px;
+    min-height: auto;
+  }
+
+  .info-icon {
+    flex-basis: 40px;
+    width: 40px;
+    height: 40px;
+    font-size: 21px;
+  }
+
+  .info-card h3 {
+    font-size: 14px;
+  }
+
+  .info-card p {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+}
+
+/* 21. Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* =========================================================
+   23. ACHIEVEMENTS SECTION
+   Matches the existing panel, typography and theme system
+   ========================================================= */
+
+.achievements-section {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid
+    color-mix(in srgb, var(--color-base-content) 10%, transparent);
+  border-radius: 20px;
+  background: var(--color-base-100);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.07);
+}
+
+.achievements-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.achievements-heading h2 {
+  margin: 7px 0 5px;
+  color: var(--color-base-content);
+  font-size: 28px;
+  line-height: 1.3;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.achievements-heading p {
+  margin: 0;
+  color: var(--color-base-content);
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.58;
+}
+
+.achievement-total {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 10px 13px;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 22%, transparent);
+  border-radius: 12px;
+  background: color-mix(
+    in srgb,
+    var(--color-primary) 8%,
+    var(--color-base-100)
+  );
+}
+
+.achievement-total strong {
+  color: var(--color-primary);
+  font-size: 23px;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.achievement-total span {
+  color: var(--color-base-content);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  opacity: 0.55;
+}
+
+/* Achievement cards grid */
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* Individual achievement card */
+
+.achievement-card {
+  min-width: 0;
+  min-height: 126px;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 17px;
+  overflow: hidden;
+  border: 1px solid
+    color-mix(in srgb, var(--color-base-content) 9%, transparent);
+  border-radius: 14px;
+  background: var(--color-base-200);
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.achievement-card.is-unlocked {
+  border-color: color-mix(in srgb, var(--color-primary) 35%, transparent);
+  background: color-mix(
+    in srgb,
+    var(--color-primary) 7%,
+    var(--color-base-100)
+  );
+}
+
+.achievement-card.is-locked {
+  opacity: 0.72;
+}
+
+.achievement-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--color-primary) 35%, transparent);
+}
+
+/* Achievement icon */
+
+.achievement-icon {
+  flex: 0 0 46px;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--color-base-content) 7%, transparent);
+  font-size: 24px;
+  line-height: 1;
+  filter: grayscale(1);
+}
+
+.achievement-card.is-unlocked .achievement-icon {
+  background: color-mix(in srgb, var(--color-primary) 14%, transparent);
+  filter: none;
+}
+
+/* Achievement text */
+
+.achievement-copy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.achievement-copy h3 {
+  margin: 1px 0 5px;
+  color: var(--color-base-content);
+  font-size: 16px;
+  line-height: 1.45;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.achievement-copy p {
+  margin: 0;
+  color: var(--color-base-content);
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.62;
+}
+
+.achievement-status {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 10px;
+  color: var(--color-base-content);
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  opacity: 0.58;
+}
+
+.achievement-card.is-unlocked .achievement-status {
+  color: var(--color-success);
+  opacity: 1;
+}
+
+/* =========================================================
+   24. CUSTOM SITE FOOTER
+   ========================================================= */
+
+.site-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  margin-top: 28px;
+  padding: 24px 12px 10px;
+  border-top: 1px solid
+    color-mix(in srgb, var(--color-base-content) 10%, transparent);
+  text-align: center;
+}
+
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--color-base-content);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+}
+
+.footer-brand-mark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--color-primary);
+  color: var(--color-primary-content);
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.site-footer p {
+  margin: 0;
+  color: var(--color-base-content);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  opacity: 0.55;
+}
+
+.site-footer p span {
+  padding: 0 5px;
+  color: var(--color-primary);
+}
+
+.footer-credit {
+  margin: 2px 0 0;
+  color: var(--color-base-content);
+  font-size: 13px;
+  opacity: 1;
+}
+
+.footer-credit strong {
+  color: var(--color-primary);
+  font-weight: 800;
+}
+
+.footer-copyright {
+  margin: 0;
+  color: var(--color-base-content);
+  font-size: 12px;
+  opacity: 0.42;
+}
+
+/* =========================================================
+   25. ACHIEVEMENTS RESPONSIVE LAYOUT
+   ========================================================= */
+
+@media (max-width: 850px) {
+  .achievements-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 540px) {
+  .achievements-section {
+    margin-top: 20px;
+    padding: 17px;
+    border-radius: 17px;
+  }
+
+  .achievements-heading {
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .achievements-heading h2 {
+    font-size: 23px;
+  }
+
+  .achievements-heading p {
+    max-width: 220px;
+    font-size: 13px;
+  }
+
+  .achievement-total {
+    padding: 8px 10px;
+  }
+
+  .achievement-total strong {
+    font-size: 19px;
+  }
+
+  .achievement-total span {
+    font-size: 8px;
+  }
+
+  .achievements-grid {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .achievement-card {
+    min-height: 96px;
+    padding: 14px;
+    gap: 13px;
+  }
+
+  .achievement-icon {
+    flex-basis: 42px;
+    width: 42px;
+    height: 42px;
+    font-size: 22px;
+  }
+
+  .achievement-copy h3 {
+    font-size: 15px;
+  }
+
+  .achievement-copy p {
+    font-size: 13px;
+  }
+
+  .achievement-status {
+    margin-top: 7px;
+    font-size: 11px;
+  }
+
+  .site-footer {
+    margin-top: 22px;
+    padding-top: 20px;
+  }
+}
